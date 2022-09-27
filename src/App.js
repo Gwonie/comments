@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import "./App.css";
 import CommentsList from "./components/CommentsList";
@@ -12,12 +13,33 @@ const Wrapper = styled.div`
   border-radius: 20px;
   padding: 1.5rem;
 `;
+const data = [
+  {
+    id: 1,
+    writer: "김뫄뫄",
+    contents: `html 짱짱맨!!`,
+    isLike: false,
+  },
+  {
+    id: 2,
+    writer: "박솨솨",
+    contents: `css 짱짱맨!!`,
+    isLike: false,
+  },
+  {
+    id: 3,
+    writer: "이야야",
+    contents: `Javascript 짱짱맨!!`,
+    isLike: false,
+  },
+];
 
 function App() {
+  const [comments, setComments] = useState(data);
   return (
     <Wrapper>
-      <CreateComments />
-      <CommentsList />
+      <CreateComments comments={comments} setComments={setComments} />
+      <CommentsList comments={comments} />
     </Wrapper>
   );
 }

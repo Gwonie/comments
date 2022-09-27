@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -19,7 +19,7 @@ const BottomContents = styled.div`
   }
 `;
 
-function CreateComments() {
+function CreateComments({ comments, setComments }) {
   // 작성자, 댓글내용 상태
   const [input, setInput] = useState({
     writer: "",
@@ -28,7 +28,7 @@ function CreateComments() {
   const { writer, contents } = { ...input };
 
   // input값 핸들러
-  const handleInputChange = (e) => {
+  const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
@@ -36,23 +36,44 @@ function CreateComments() {
     console.log("댓글입력창 렌더");
   });
 
+  // 댓글 새로운 id값 관리
+  let nextId = useRef(4);
+
+  // 댓글 추가 기능
+  const handleClickSubmit = () => {
+    // 댓글 데이터 추가
+    setComments([
+      ...comments,
+      {
+        id: nextId.current,
+        writer: writer,
+        contents: contents,
+        isLike: false,
+      },
+    ]);
+    // input값 초기화
+    setInput({ writer: "", contents: "" });
+    // id값 + 1
+    nextId.current += 1;
+  };
+
   return (
     <Wrapper>
       <input
         type="text"
         placeholder="작성자"
-        onChange={handleInputChange}
+        onChange={handleChangeInput}
         name="writer"
         value={writer}
       />
       <BottomContents>
         <textarea
           placeholder="댓글내용"
-          onChange={handleInputChange}
+          onChange={handleChangeInput}
           name="contents"
           value={contents}
         />
-        <button>등록</button>
+        <button onClick={handleClickSubmit}>등록</button>
       </BottomContents>
     </Wrapper>
   );

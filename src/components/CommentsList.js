@@ -29,31 +29,11 @@ const Buttons = styled.div`
   }
 `;
 
-const comments = [
-  {
-    id: 1,
-    writer: "김뫄뫄",
-    contents: `html 짱짱맨!!`,
-    isLike: false,
-  },
-  {
-    id: 2,
-    writer: "박솨솨",
-    contents: `css 짱짱맨!!`,
-    isLike: false,
-  },
-  {
-    id: 3,
-    writer: "이야야",
-    contents: `Javascript 짱짱맨!!`,
-    isLike: false,
-  },
-];
-
 function Comment({ comment }) {
-  const { writer, contents, isLike } = { ...comment };
+  const { id, writer, contents, isLike } = { ...comment };
   return (
     <Wrapper>
+      {id}
       <Contents>
         <h3>{writer}</h3>
         <p>{contents}</p>
@@ -73,7 +53,7 @@ function Comment({ comment }) {
   );
 }
 
-function CommentsList() {
+function CommentsList({ comments }) {
   return (
     <TopWapper>
       {comments.map((comment) => {
