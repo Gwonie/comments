@@ -1,7 +1,12 @@
 import "./App.css";
+import CreateComments from "./components/CreateComments";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <>
+      <CreateComments />
+    </>
+  );
 }
 
 export default App;
