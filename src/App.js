@@ -18,19 +18,19 @@ const data = [
     id: 1,
     writer: "김뫄뫄",
     contents: `html 짱짱맨!!`,
-    isLike: false,
+    Like: false,
   },
   {
     id: 2,
     writer: "박솨솨",
     contents: `css 짱짱맨!!`,
-    isLike: false,
+    Like: false,
   },
   {
     id: 3,
     writer: "이야야",
     contents: `Javascript 짱짱맨!!`,
-    isLike: false,
+    Like: false,
   },
 ];
 

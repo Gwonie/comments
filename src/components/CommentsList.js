@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const TopWapper = styled.div`
   margin-top: 1rem;
@@ -30,7 +31,13 @@ const Buttons = styled.div`
 `;
 
 function Comment({ comment }) {
-  const { id, writer, contents, isLike } = { ...comment };
+  const { id, writer, contents, like } = { ...comment };
+
+  const [islike, setIsLike] = useState(like);
+
+  const onToggle = () => {
+    setIsLike(!islike);
+  };
   return (
     <Wrapper>
       {id}
@@ -42,7 +49,8 @@ function Comment({ comment }) {
       <Buttons>
         <FontAwesomeIcon
           icon={faHeart}
-          className={isLike ? "like active" : "like"}
+          className={islike ? "like active" : "like"}
+          onClick={onToggle}
         />
         <div>
           <button>수정</button>
