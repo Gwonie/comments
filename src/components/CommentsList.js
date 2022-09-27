@@ -56,6 +56,12 @@ function Comment({ comment, comments, setComments }) {
     onToggleIsEdit();
   };
 
+  // 수정취소
+  const handleClickUndone = () => {
+    setEditContents(contents);
+    onToggleIsEdit();
+  };
+
   return (
     <Wrapper>
       {id}
@@ -83,7 +89,7 @@ function Comment({ comment, comments, setComments }) {
           {isEdit ? (
             <>
               <button onClick={() => handleClickDone(id)}>수정완료</button>
-              <button>수정취소</button>
+              <button onClick={handleClickUndone}>수정취소</button>
             </>
           ) : (
             <>
