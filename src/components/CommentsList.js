@@ -30,42 +30,85 @@ const Buttons = styled.div`
   }
 `;
 
-function Comment({ comment }) {
+function Comment({ comment, comments, setComments }) {
   const { id, writer, contents, like } = { ...comment };
+  const [editContents, setEditContents] = useState(contents);
 
+  // 좋아요 기능
   const [islike, setIsLike] = useState(like);
-
-  const onToggle = () => {
+  const [isEdit, setIsEdit] = useState(false);
+  const onToggleLike = () => {
     setIsLike(!islike);
   };
+
+  // 수정토글
+  const onToggleIsEdit = () => {
+    setIsEdit(!isEdit);
+  };
+
+  // 수정완료
+  const handleClickDone = (commentId) => {
+    setComments(
+      comments.map((it) =>
+        it.id === commentId ? { ...it, contents: editContents } : it
+      )
+    );
+    onToggleIsEdit();
+  };
+
   return (
     <Wrapper>
       {id}
       <Contents>
         <h3>{writer}</h3>
-        <p>{contents}</p>
-        {/* <input type="text" value={contents} /> */}
+        {isEdit ? (
+          <input
+            type="text"
+            value={editContents}
+            onChange={(e) => {
+              setEditContents(e.target.value);
+            }}
+          />
+        ) : (
+          <p>{contents}</p>
+        )}
       </Contents>
       <Buttons>
         <FontAwesomeIcon
           icon={faHeart}
           className={islike ? "like active" : "like"}
-          onClick={onToggle}
+          onClick={onToggleLike}
         />
         <div>
-          <button>수정</button>
-          <button>삭제</button>
+          {isEdit ? (
+            <>
+              <button onClick={() => handleClickDone(id)}>수정완료</button>
+              <button>수정취소</button>
+            </>
+          ) : (
+            <>
+              <button onClick={onToggleIsEdit}>수정</button>
+              <button>삭제</button>
+            </>
+          )}
         </div>
       </Buttons>
     </Wrapper>
   );
 }
 
-function CommentsList({ comments }) {
+function CommentsList({ comments, setComments }) {
   return (
     <TopWapper>
       {comments.map((comment) => {
-        return <Comment key={comment.id} comment={comment} />;
+        return (
+          <Comment
+            key={comment.id}
+            comment={comment}
+            comments={comments}
+            setComments={setComments}
+          />
+        );
       })}
     </TopWapper>
   );

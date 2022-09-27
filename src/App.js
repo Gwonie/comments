@@ -39,7 +39,7 @@ function App() {
   return (
     <Wrapper>
       <CreateComments comments={comments} setComments={setComments} />
-      <CommentsList comments={comments} />
+      <CommentsList comments={comments} setComments={setComments} />
     </Wrapper>
   );
 }

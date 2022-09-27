@@ -51,8 +51,10 @@ function CreateComments({ comments, setComments }) {
         isLike: false,
       },
     ]);
+
     // input값 초기화
     setInput({ writer: "", contents: "" });
+
     // id값 + 1
     nextId.current += 1;
   };
