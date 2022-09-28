@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -67,8 +67,14 @@ function Comment({ comment, setComments }) {
     setIsEdit(!isEdit);
   };
 
+  let editContentsRef = useRef();
+
   // 수정완료
   const handleClickDone = (commentId) => {
+    if (editContents < 1) {
+      editContentsRef.current.focus();
+      return;
+    }
     setComments((comments) =>
       comments.map((it) =>
         it.id === commentId ? { ...it, contents: editContents } : it
@@ -103,6 +109,7 @@ function Comment({ comment, setComments }) {
               onChange={(e) => {
                 setEditContents(e.target.value);
               }}
+              ref={editContentsRef}
             />
           ) : (
             <p>{contents}</p>
