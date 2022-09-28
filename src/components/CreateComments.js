@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   input {
     width: 50%;
     height: 1.5rem;
-    padding: 0.5em;
+    padding: 0.3em;
   }
 `;
 
@@ -47,8 +47,21 @@ function CreateComments({ setComments }) {
   // 댓글 새로운 id값 관리
   let nextId = useRef(4);
 
+  // 작성자 ref
+  let writerRef = useRef();
+  // 댓글내용 ref
+  let contentsRef = useRef();
+
   // 댓글 추가 기능
   const handleClickSubmit = () => {
+    if (writer.length < 1) {
+      writerRef.current.focus();
+      return;
+    }
+    if (contents.length < 1) {
+      contentsRef.current.focus();
+      return;
+    }
     // 댓글 데이터 추가
     setComments((comments) => [
       ...comments,
@@ -75,6 +88,7 @@ function CreateComments({ setComments }) {
         onChange={handleChangeInput}
         name="writer"
         value={writer}
+        ref={writerRef}
       />
       <BottomContents>
         <textarea
@@ -82,6 +96,7 @@ function CreateComments({ setComments }) {
           onChange={handleChangeInput}
           name="contents"
           value={contents}
+          ref={contentsRef}
         />
         <button onClick={handleClickSubmit}>등록</button>
       </BottomContents>
