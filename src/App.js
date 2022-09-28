@@ -38,7 +38,7 @@ function App() {
   const [comments, setComments] = useState(data);
   return (
     <Wrapper>
-      <CreateComments comments={comments} setComments={setComments} />
+      <CreateComments setComments={setComments} />
       <CommentsList comments={comments} setComments={setComments} />
     </Wrapper>
   );

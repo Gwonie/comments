@@ -19,7 +19,7 @@ const BottomContents = styled.div`
   }
 `;
 
-function CreateComments({ comments, setComments }) {
+function CreateComments({ setComments }) {
   // 작성자, 댓글내용 상태
   const [input, setInput] = useState({
     writer: "",
@@ -32,17 +32,13 @@ function CreateComments({ comments, setComments }) {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    console.log("댓글입력창 렌더");
-  });
-
   // 댓글 새로운 id값 관리
   let nextId = useRef(4);
 
   // 댓글 추가 기능
   const handleClickSubmit = () => {
     // 댓글 데이터 추가
-    setComments([
+    setComments((comments) => [
       ...comments,
       {
         id: nextId.current,

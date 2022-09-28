@@ -7,9 +7,6 @@ const TopWapper = styled.div`
 `;
 
 function CommentsList({ comments, setComments }) {
-  useEffect(() => {
-    console.log("댓글리스트 렌더");
-  });
   return (
     <TopWapper>
       {comments.map((comment) => {
@@ -17,7 +14,6 @@ function CommentsList({ comments, setComments }) {
           <Comment
             key={comment.id}
             comment={comment}
-            comments={comments}
             setComments={setComments}
           />
         );

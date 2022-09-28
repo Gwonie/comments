@@ -26,12 +26,7 @@ const Buttons = styled.div`
   }
 `;
 
-function Comment({ comment, comments, setComments }) {
-  useEffect(() => {
-    console.log("댓글각각 렌더");
-    // 추가 댓글 하나만 렌더 필요
-  });
-
+function Comment({ comment, setComments }) {
   const { id, writer, contents, like } = { ...comment };
   const [editContents, setEditContents] = useState(contents);
 
@@ -49,7 +44,7 @@ function Comment({ comment, comments, setComments }) {
 
   // 수정완료
   const handleClickDone = (commentId) => {
-    setComments(
+    setComments((comments) =>
       comments.map((it) =>
         it.id === commentId ? { ...it, contents: editContents } : it
       )
@@ -61,6 +56,11 @@ function Comment({ comment, comments, setComments }) {
   const handleClickUndone = () => {
     setEditContents(contents);
     onToggleIsEdit();
+  };
+
+  // 댓글 삭제
+  const onRemove = (commentId) => {
+    setComments((comments) => comments.filter((it) => it.id !== commentId));
   };
 
   return (
@@ -95,7 +95,7 @@ function Comment({ comment, comments, setComments }) {
           ) : (
             <>
               <button onClick={onToggleIsEdit}>수정</button>
-              <button>삭제</button>
+              <button onClick={() => onRemove(id)}>삭제</button>
             </>
           )}
         </div>
