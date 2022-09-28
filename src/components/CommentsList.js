@@ -27,12 +27,14 @@ const Comments = styled.div`
 
 function CommentsList({ comments, setComments }) {
   useEffect(() => {
-    console.log("댓글리스트 렌더");
+    // console.log("댓글리스트 렌더");
   });
   return (
     <TopWapper>
       <Title>
-        <h1>댓글</h1>
+        <h1>
+          댓글({comments.length})
+        </h1>
       </Title>
       <Comments>
         {comments.map((comment) => {

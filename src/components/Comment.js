@@ -95,7 +95,7 @@ function Comment({ comment, setComments }) {
   };
 
   useEffect(() => {
-    console.log("각각 렌더");
+    // console.log("각각 렌더");
   });
 
   return (
