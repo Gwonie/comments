@@ -5,13 +5,13 @@ import CommentsList from "./components/CommentsList";
 import CreateComments from "./components/CreateComments";
 
 const Wrapper = styled.div`
-  width: 768px;
-  height: calc(768px * 0.9);
+  width: 375px;
+  height: 667px;
   margin: 0 auto;
-  margin-top: calc(768px * 0.1);
-  border: 1px solid black;
+  margin-top: 4rem;
+  border: 2px solid gray;
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 1rem;
 `;
 const data = [
   {

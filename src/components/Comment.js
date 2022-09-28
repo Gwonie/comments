@@ -4,16 +4,21 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
+  width: 100%;
+  min-height: 4.5rem;
   margin-top: 0.5rem;
-  border: 1px solid black;
+  border: 2px solid lightgray;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 0.6em;
 `;
 
-const Contents = styled.div``;
+const Contents = styled.div`
+  width: 80%;
+`;
 
 const Buttons = styled.div`
+  width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -24,6 +29,26 @@ const Buttons = styled.div`
   .active {
     color: tomato;
   }
+`;
+
+const Content = styled.div`
+  width: 100%;
+  min-height: 2rem;
+  margin-top: 0.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  textarea {
+    width: 100%;
+    height: 3rem;
+    padding: 0.3em;
+    resize: none;
+  }
+`;
+
+const EditButtons = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 function Comment({ comment, setComments }) {
@@ -63,22 +88,26 @@ function Comment({ comment, setComments }) {
     setComments((comments) => comments.filter((it) => it.id !== commentId));
   };
 
+  useEffect(() => {
+    console.log("각각 렌더");
+  });
+
   return (
     <Wrapper>
-      {id}
       <Contents>
-        <h3>{writer}</h3>
-        {isEdit ? (
-          <input
-            type="text"
-            value={editContents}
-            onChange={(e) => {
-              setEditContents(e.target.value);
-            }}
-          />
-        ) : (
-          <p>{contents}</p>
-        )}
+        <h5>{writer}</h5>
+        <Content>
+          {isEdit ? (
+            <textarea
+              value={editContents}
+              onChange={(e) => {
+                setEditContents(e.target.value);
+              }}
+            />
+          ) : (
+            <p>{contents}</p>
+          )}
+        </Content>
       </Contents>
       <Buttons>
         <FontAwesomeIcon
@@ -86,7 +115,7 @@ function Comment({ comment, setComments }) {
           className={islike ? "like active" : "like"}
           onClick={onToggleLike}
         />
-        <div>
+        <EditButtons>
           {isEdit ? (
             <>
               <button onClick={() => handleClickDone(id)}>수정완료</button>
@@ -98,7 +127,7 @@ function Comment({ comment, setComments }) {
               <button onClick={() => onRemove(id)}>삭제</button>
             </>
           )}
-        </div>
+        </EditButtons>
       </Buttons>
     </Wrapper>
   );

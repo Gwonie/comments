@@ -2,20 +2,32 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  border: 1px solid black;
+  width: 100%;
+  height: 20%;
+  border: 2px solid darkgray;
   padding: 1rem;
   width: 100%;
   input {
-    width: 30%;
+    width: 50%;
+    height: 1.5rem;
+    padding: 0.5em;
   }
 `;
 
 const BottomContents = styled.div`
   width: 100%;
+  height: 3.5rem;
   display: flex;
   align-items: center;
+  margin-top: 0.3rem;
   textarea {
-    width: 70%;
+    width: 100%;
+    height: 100%;
+    padding: 0.3em;
+    resize: none;
+  }
+  button {
+    height: 100%;
   }
 `;
 
